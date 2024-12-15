@@ -143,9 +143,9 @@ const Page = () => {
       </div>
       <div className="flex flex-col gap-5">
         <Input
-          label="Game Title"
           labelPlacement="outside"
           className="w-full md:w-[50%]"
+          label="Game Title"
           color="secondary"
           placeholder="Enter Game Title"
           name="title"
@@ -163,8 +163,6 @@ const Page = () => {
           onChange={handleInputChange}
         />
         <Input
-          label="Game Banner URL"
-          labelPlacement="outside"
           className="w-full md:w-[50%]"
           color="secondary"
           placeholder="Enter Game Banner URL"
@@ -173,8 +171,6 @@ const Page = () => {
           onChange={handleInputChange}
         />
         <Input
-          label="Game Image URL"
-          labelPlacement="outside"
           color="secondary"
           className="w-full md:w-[50%]"
           placeholder="Enter Game Image URL"

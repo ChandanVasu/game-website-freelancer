@@ -7,18 +7,14 @@ import { BiSolidCategoryAlt } from "react-icons/bi";
 import { MdBugReport } from "react-icons/md";
 import { useEffect, useState } from "react";
 
-
-
 const page = () => {
-
-  const [games, setGames] = useState(0);
-
+  const [games, setGames] = useState(99);
+  const [categories, setCategories] = useState(99);
 
   const fetchGames = async () => {
     try {
       const response = await fetch("/api/game?dataCollection=GameList");
       const data = await response.json();
-      console.log(data);
       setGames(data.length);
     } catch (error) {
       console.error("Error fetching games:", error);
@@ -27,8 +23,19 @@ const page = () => {
     }
   };
 
+  const fetchCategories = async () => {
+    try {
+      const response = await fetch("/api/game?dataCollection=Categories");
+      const data = await response.json();
+      setCategories(data.length);
+    } catch (error) {
+      console.error("Error fetching games:", error);
+    }
+  };
+
   useEffect(() => {
     fetchGames();
+    fetchCategories();
   }, []);
 
   return (
@@ -61,7 +68,7 @@ const page = () => {
           <div className="flex justify-between items-center">
             <div>
               <h1 className="text-xl font-bold"> CATEGORY</h1>
-              <h2 className="text-lg font-semibold">99</h2>
+              <h2 className="text-lg font-semibold">{categories}</h2>
             </div>
             <BiSolidCategoryAlt className="text-3xl opacity-65" />
           </div>

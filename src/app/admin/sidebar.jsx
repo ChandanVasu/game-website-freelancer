@@ -10,7 +10,7 @@ import { IoMdPricetag } from "react-icons/io";
 
 // import { SiMinutemailer } from "react-icons/si";
 // import { IoIosColorPalette } from "react-icons/io";
-import {  MdSettings } from "react-icons/md";
+import { MdSettings } from "react-icons/md";
 import { IoLogoGameControllerB } from "react-icons/io";
 
 import { BsTrash3 } from "react-icons/bs";
@@ -50,7 +50,7 @@ const SideBar = () => {
           </li>
         </Link>
 
-        <Link href="/featured-games">
+        {/* <Link href="/featured-games">
           <li
             className={`flex gap-2 items-center justify-start px-3 py-1 rounded-md text-base ${
               pathname === "/featured-games" ? "bg-white" : "hover:bg-white/60"
@@ -59,12 +59,14 @@ const SideBar = () => {
             <IoMdPricetag />
             <p className="font-medium text-sm">Featured Games</p>
           </li>
-        </Link>
+        </Link> */}
 
         <Link href="/admin/categories">
           <li
             className={`flex gap-2 items-center justify-start px-3 py-1 rounded-md text-base ${
-              pathname === "/admin/categories" ? "bg-white" : "hover:bg-white/60"
+              pathname === "/admin/categories"
+                ? "bg-white"
+                : "hover:bg-white/60"
             }`}
           >
             <BiSolidCategoryAlt />
@@ -182,7 +184,7 @@ const SideBar = () => {
           </li>
         </Link>
 
-        <Link href="/delete-all-games">
+        {/* <Link href="/delete-all-games">
           <li
             className={`flex gap-2 items-center justify-start px-3 py-1 rounded-md text-base ${
               pathname === "/delete-all-games"
@@ -193,7 +195,7 @@ const SideBar = () => {
             <BsTrash3 />
             <p className="font-medium text-sm">Delete All Games</p>
           </li>
-        </Link>
+        </Link> */}
 
         <Link href="/logout">
           <li
