@@ -4,18 +4,23 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation"; // Hook to get the current pathname
 import { CiHome } from "react-icons/ci";
-import { BiSolidCollection } from "react-icons/bi";
 import { IoMdPricetag } from "react-icons/io";
-import { TbUserFilled } from "react-icons/tb";
-import { FaImages } from "react-icons/fa";
-import { IoIosAnalytics } from "react-icons/io";
-import { RiDiscountPercentFill } from "react-icons/ri";
-import { SiMinutemailer } from "react-icons/si";
-import { IoIosColorPalette } from "react-icons/io";
-import { MdOutlineAutoGraph, MdSettings, MdUpdate } from "react-icons/md";
-import { BsGearFill, BsTrash3 } from "react-icons/bs";
+// import { TbUserFilled } from "react-icons/tb";
+// import { FaImages } from "react-icons/fa";
+
+// import { SiMinutemailer } from "react-icons/si";
+// import { IoIosColorPalette } from "react-icons/io";
+import {  MdSettings } from "react-icons/md";
+import { IoLogoGameControllerB } from "react-icons/io";
+
+import { BsTrash3 } from "react-icons/bs";
 import { FaBlog, FaAd } from "react-icons/fa";
+import { BiSolidCategoryAlt } from "react-icons/bi";
+import { MdComment } from "react-icons/md";
+import { MdBugReport } from "react-icons/md";
+
 import { FiLogOut } from "react-icons/fi";
+import { FaBook } from "react-icons/fa";
 
 const SideBar = () => {
   const pathname = usePathname(); // Get the current path
@@ -23,10 +28,10 @@ const SideBar = () => {
   return (
     <div>
       <ul className="flex flex-col gap-2">
-        <Link href="/">
+        <Link href="/admin">
           <li
             className={`flex gap-2 items-center justify-start px-3 py-1 rounded-md text-base ${
-              pathname === "/" ? "bg-white" : "hover:bg-white/60"
+              pathname === "/admin" ? "bg-white" : "hover:bg-white/60"
             }`}
           >
             <CiHome />
@@ -34,13 +39,13 @@ const SideBar = () => {
           </li>
         </Link>
 
-        <Link href="/games">
+        <Link href="/admin/games">
           <li
             className={`flex gap-2 items-center justify-start px-3 py-1 rounded-md text-base ${
-              pathname === "/games" ? "bg-white" : "hover:bg-white/60"
+              pathname === "/admin/games" ? "bg-white" : "hover:bg-white/60"
             }`}
           >
-            <BiSolidCollection />
+            <IoLogoGameControllerB />
             <p className="font-medium text-sm">Games</p>
           </li>
         </Link>
@@ -56,18 +61,18 @@ const SideBar = () => {
           </li>
         </Link>
 
-        <Link href="/categories">
+        <Link href="/admin/categories">
           <li
             className={`flex gap-2 items-center justify-start px-3 py-1 rounded-md text-base ${
-              pathname === "/categories" ? "bg-white" : "hover:bg-white/60"
+              pathname === "/admin/categories" ? "bg-white" : "hover:bg-white/60"
             }`}
           >
-            <TbUserFilled />
+            <BiSolidCategoryAlt />
             <p className="font-medium text-sm">Categories</p>
           </li>
         </Link>
 
-        <Link href="/users">
+        {/* <Link href="/users">
           <li
             className={`flex gap-2 items-center justify-start px-3 py-1 rounded-md text-base ${
               pathname === "/users" ? "bg-white" : "hover:bg-white/60"
@@ -76,7 +81,7 @@ const SideBar = () => {
             <FaImages />
             <p className="font-medium text-sm">Users</p>
           </li>
-        </Link>
+        </Link> */}
 
         <Link href="/comments">
           <li
@@ -84,7 +89,7 @@ const SideBar = () => {
               pathname === "/comments" ? "bg-white" : "hover:bg-white/60"
             }`}
           >
-            <IoIosAnalytics />
+            <MdComment />
             <p className="font-medium text-sm">Comments</p>
           </li>
         </Link>
@@ -95,7 +100,7 @@ const SideBar = () => {
               pathname === "/pages" ? "bg-white" : "hover:bg-white/60"
             }`}
           >
-            <RiDiscountPercentFill />
+            <FaBook />
             <p className="font-medium text-sm">Pages</p>
           </li>
         </Link>
@@ -117,12 +122,12 @@ const SideBar = () => {
               pathname === "/reports" ? "bg-white" : "hover:bg-white/60"
             }`}
           >
-            <MdOutlineAutoGraph />
+            <MdBugReport />
             <p className="font-medium text-sm">Reports</p>
           </li>
         </Link>
 
-        <Link href="/auto-fetching">
+        {/* <Link href="/auto-fetching">
           <li
             className={`flex gap-2 items-center justify-start px-3 py-1 rounded-md text-base ${
               pathname === "/auto-fetching" ? "bg-white" : "hover:bg-white/60"
@@ -131,9 +136,9 @@ const SideBar = () => {
             <MdUpdate />
             <p className="font-medium text-sm">Auto Fetching</p>
           </li>
-        </Link>
+        </Link> */}
 
-        <Link href="/sections">
+        {/* <Link href="/sections">
           <li
             className={`flex gap-2 items-center justify-start px-3 py-1 rounded-md text-base ${
               pathname === "/sections" ? "bg-white" : "hover:bg-white/60"
@@ -142,9 +147,9 @@ const SideBar = () => {
             <IoIosColorPalette />
             <p className="font-medium text-sm">Sections</p>
           </li>
-        </Link>
+        </Link> */}
 
-        <Link href="/themes">
+        {/* <Link href="/themes">
           <li
             className={`flex gap-2 items-center justify-start px-3 py-1 rounded-md text-base ${
               pathname === "/themes" ? "bg-white" : "hover:bg-white/60"
@@ -153,7 +158,7 @@ const SideBar = () => {
             <BsGearFill />
             <p className="font-medium text-sm">Themes</p>
           </li>
-        </Link>
+        </Link> */}
 
         <Link href="/advertisement">
           <li
@@ -180,7 +185,9 @@ const SideBar = () => {
         <Link href="/delete-all-games">
           <li
             className={`flex gap-2 items-center justify-start px-3 py-1 rounded-md text-base ${
-              pathname === "/delete-all-games" ? "bg-white" : "hover:bg-white/60"
+              pathname === "/delete-all-games"
+                ? "bg-white"
+                : "hover:bg-white/60"
             }`}
           >
             <BsTrash3 />

@@ -10,3 +10,7 @@
 body {
     font-family: var(--font-poppins);
   }
+
+  .shadow-two{
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
+  }
