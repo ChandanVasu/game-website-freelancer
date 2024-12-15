@@ -9,7 +9,9 @@ const TopArea = () => {
 
   const fetchGames = async () => {
     try {
-      const response = await fetch("/api/game?dataCollection=GameList" ,  {cache: "force-cache"});
+      const response = await fetch("/api/game?dataCollection=GameList", {
+        cache: "force-cache",
+      });
       if (!response.ok) {
         throw new Error("Failed to fetch games");
       }
@@ -41,57 +43,30 @@ const TopArea = () => {
   }
 
   return (
-    <div>
-      <div className="flex gap-4 justify-center items-center overflow-hidden">
+    <div className="">
+      <div className="flex flex-col md:flex-row gap-4 justify-center items-center overflow-hidden">
+        {/* Left image */}
         <img
-          className="w-[25%] h-[300px] rounded-md"
+          className="w-full md:w-[25%] h-[200px] md:h-[300px] rounded-md"
           src={games[0]?.image}
           alt=""
         />
-        <div className="w-[50%] grid grid-cols-4 gap-2">
-          <img
-            className="h-[146px] w-full rounded-md"
-            src={games[1]?.image}
-            alt=""
-          />
-          <img
-            className="h-[146px] w-full rounded-md"
-            src={games[2]?.image}
-            alt=""
-          />
-          <img
-            className="h-[146px] w-full rounded-md"
-            src={games[3]?.image}
-            alt=""
-          />
-          <img
-            className="h-[146px] w-full rounded-md"
-            src={games[4]?.image}
-            alt=""
-          />
-          <img
-            className="h-[146px] w-full rounded-md"
-            src={games[5]?.image}
-            alt=""
-          />
-          <img
-            className="h-[146px] w-full rounded-md"
-            src={games[6]?.image}
-            alt=""
-          />
-          <img
-            className="h-[146px] w-full rounded-md"
-            src={games[7]?.image}
-            alt=""
-          />
-          <img
-            className="h-[146px] w-full rounded-md"
-            src={games[8]?.image}
-            alt=""
-          />
+
+        {/* Center grid */}
+        <div className="w-full md:w-[50%] grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+          {games.slice(1, 9).map((game, index) => (
+            <img
+              key={index}
+              className="h-[120px] sm:h-[146px] w-full rounded-md"
+              src={game?.image}
+              alt=""
+            />
+          ))}
         </div>
+
+        {/* Right image */}
         <img
-          className="w-[25%] h-[300px] rounded-md"
+          className="w-full md:w-[25%] h-[200px] md:h-[300px] rounded-md"
           src={games[9]?.image}
           alt=""
         />

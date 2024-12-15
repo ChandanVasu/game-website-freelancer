@@ -11,7 +11,7 @@ const Footer = () => {
         <span className="text-red-500">e</span>
         <span className="text-pink-500">s</span>
       </div>
-      <div className="flex justify-start space-x-4 text-blue-500 text-sm mt-4">
+      <div className="grid grid-cols-2 md:grid-cols-5  text-blue-500 text-sm mt-4 w-full md:w-[35%]">
         <a href="#" className="hover:underline">
           All Games
         </a>
@@ -23,9 +23,6 @@ const Footer = () => {
         </a>
         <a href="#" className="hover:underline">
           Privacy
-        </a>
-        <a href="#" className="hover:underline">
-          Join our Discord
         </a>
       </div>
       <div className="text-gray-500 text-xs mt-4">© Lagged 2024</div>

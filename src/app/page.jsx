@@ -1,5 +1,6 @@
 import TopArea from "@/components/main/topArea";
 import GridGameOne from "@/components/main/gameGridOne";
+import Categorie from "@/components/main/categorie";
 
 export default function Home() {
   return (
@@ -7,6 +8,7 @@ export default function Home() {
       <TopArea></TopArea>
       <GridGameOne></GridGameOne>
       <GridGameOne></GridGameOne>
+      <Categorie></Categorie>
     </div>
   );
 }

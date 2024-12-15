@@ -48,10 +48,10 @@ const TopArea = () => {
         <h1 className="text-lg font-bold">New Games</h1>
         <p className="text-sm text-blue-700">All Game</p>
       </div>
-      <div className="grid grid-cols-8 gap-4 ">
+      <div className="grid grid-cols-3 md:grid-cols-8 gap-4 ">
         {games.map((game, index) => (
           <div className="shadow-one rounded-md" key={game._id}>
-            <img className="h-40 w-full rounded-md" src={game.image} alt="" />
+            <img className="h-20 md:h-40 w-full rounded-md" src={game.image} alt="" />
           </div>
         ))}
       </div>
