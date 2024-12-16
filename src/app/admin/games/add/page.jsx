@@ -10,7 +10,6 @@ const Page = () => {
   const [formData, setFormData] = useState({
     title: "",
     url: "",
-    banner: "",
     image: "",
     category: "",
     description: "",
@@ -152,36 +151,6 @@ const Page = () => {
           value={formData.title}
           onChange={handleInputChange}
         />
-        <Input
-          label="Game URL"
-          labelPlacement="outside"
-          color="secondary"
-          className="w-full md:w-[50%]"
-          placeholder="Enter Game URL"
-          name="url"
-          value={formData.url}
-          onChange={handleInputChange}
-        />
-        <Input
-          label="Game Banner URL"
-          labelPlacement="outside"
-          className="w-full md:w-[50%]"
-          color="secondary"
-          placeholder="Enter Game Banner URL"
-          name="banner"
-          value={formData.banner}
-          onChange={handleInputChange}
-        />
-        <Input
-          label="Game Image URL"
-          labelPlacement="outside"
-          color="secondary"
-          className="w-full md:w-[50%]"
-          placeholder="Enter Game Image URL"
-          name="image"
-          value={formData.image}
-          onChange={handleInputChange}
-        />
         <Select
           className="w-full md:w-[50%]"
           labelPlacement="outside"
@@ -196,6 +165,26 @@ const Page = () => {
             <SelectItem key={category.name}>{category.name}</SelectItem>
           ))}
         </Select>
+        <Input
+          label="Game URL"
+          labelPlacement="outside"
+          color="secondary"
+          className="w-full md:w-[50%]"
+          placeholder="Enter Game URL"
+          name="url"
+          value={formData.url}
+          onChange={handleInputChange}
+        />
+        <Input
+          label="Game Image URL"
+          labelPlacement="outside"
+          color="secondary"
+          className="w-full md:w-[50%]"
+          placeholder="Enter Game Image URL"
+          name="image"
+          value={formData.image}
+          onChange={handleInputChange}
+        />
       </div>
 
       <Textarea
