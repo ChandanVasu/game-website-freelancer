@@ -109,7 +109,7 @@ const GameList = () => {
       </div>
 
       {/* Spinner or Categories List */}
-      <div className="space-y-2 w-[50%]">
+      <div className="space-y-2 mf:w-[50%] w-full">
         {loading ? (
           <div className="flex justify-center items-center min-h-[50vh]">
             <Spinner size="lg" />
