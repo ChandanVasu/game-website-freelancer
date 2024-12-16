@@ -85,13 +85,13 @@ const GameList = () => {
               <div className="flex gap-4 col-span-2">
                 <h1 className="text-4xl font-bold opacity-15">{index + 1}</h1>
                 <div>
-                  <h2 className="text-lg font-semibold">
+                  <h2 className="md:text-lg text-sm font-semibold">
                     {truncateTitle(game.title, 20)}
                   </h2>
-                  <h2 className="text-sm">Date: {formatDate(game.date)}</h2>
+                  <h2 className="md:text-sm text-xs">Date: {formatDate(game.date)}</h2>
                 </div>
               </div>
-              <div className="flex gap-4">
+              <div className="flex gap-1 flex-col md:flex-row">
                 <Button
                   onPress={() => {
                     handleDeleteCategory(game._id);
