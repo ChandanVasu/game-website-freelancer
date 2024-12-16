@@ -1,8 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
 import React from "react";
+import { Skeleton } from "@nextui-org/skeleton";
 
-const TopArea = () => {
+const TopArea = ({ filterData, title, sort }) => {
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -15,9 +16,17 @@ const TopArea = () => {
       if (!response.ok) {
         throw new Error("Failed to fetch games");
       }
-      const data = await response.json();
-      console.log(data);
-      setGames(data.slice(0, 16));
+      let data = await response.json();
+
+      if (filterData) {
+        data = data.filter((item) => item.category === filterData);
+      }
+
+      if (sort) {
+        data.sort((a, b) => new Date(b.date) - new Date(a.date));
+      }
+
+      setGames(data.slice(0, 12));
     } catch (err) {
       console.error("Error fetching games:", err);
       setError(err.message);
@@ -31,11 +40,19 @@ const TopArea = () => {
   }, []);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
+        {Array.from({ length: 12 }).map((_, index) => (
+          <div className="shadow-one rounded-md" key={index}>
+            <Skeleton className="h-20 md:h-40 w-full rounded-md" />
+          </div>
+        ))}
+      </div>
+    );
   }
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return <p className="text-red-500">Error: {error}</p>;
   }
 
   if (games.length === 0) {
@@ -45,13 +62,17 @@ const TopArea = () => {
   return (
     <div className="">
       <div className="mb-2 flex justify-between items-center">
-        <h1 className="text-lg font-bold">New Games</h1>
-        <p className="text-sm text-blue-700">All Game</p>
+        <h1 className="text-lg font-bold">{title || "New Game"}</h1>
+        <p className="text-xs md:text-sm text-blue-700">All Game</p>
       </div>
-      <div className="grid grid-cols-3 md:grid-cols-8 gap-4 ">
-        {games.map((game, index) => (
+      <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
+        {games.map((game) => (
           <div className="shadow-one rounded-md" key={game._id}>
-            <img className="h-20 md:h-40 w-full rounded-md" src={game.image} alt="" />
+            <img
+              className="h-20 md:h-40 w-full rounded-md"
+              src={game.image}
+              alt=""
+            />
           </div>
         ))}
       </div>
