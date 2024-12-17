@@ -15,27 +15,17 @@ const Page = () => {
     description: "",
   });
 
-  const [gameCategory] = useState([
-    "Action",
-    "Adventure",
-    "Racing",
-    "Sports",
-    "Strategy",
-  ]);
-
+  const [Categories, setCategories] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const [Categories, setCategories] = useState([]);
 
   const fetchCategories = async () => {
     try {
       const response = await fetch("/api/game?dataCollection=Categories");
       const data = await response.json();
       setCategories(data);
-      console.log(data);
     } catch (error) {
-      console.error("Error fetching games:", error);
+      console.error("Error fetching categories:", error);
     }
   };
 
@@ -49,22 +39,59 @@ const Page = () => {
   };
 
   const handleCategoryChange = (selectedKeys) => {
-    const selectedCategory = Array.from(selectedKeys).join(", "); // Convert Set to string
+    const selectedCategory = Array.from(selectedKeys).join(", ");
     setFormData((prev) => ({ ...prev, category: selectedCategory }));
   };
 
-  const handleSubmit = async () => {
-    const { title, url, banner, image, category, description } = formData;
+  const handleImageUpload = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
 
-    // Validate all fields
-    if (
-      !title.trim() ||
-      !url.trim() ||
-      !banner.trim() ||
-      !image.trim() ||
-      !category.trim() ||
-      !description.trim()
-    ) {
+    const uploadData = new FormData();
+    uploadData.append("file", file);
+    uploadData.append("upload_preset", "my_upload_preset"); // Replace with your Cloudinary preset
+    uploadData.append("folder", "game-images"); // Optional folder in Cloudinary
+
+    try {
+      const response = await fetch(
+        "https://api.cloudinary.com/v1_1/ddmqg3fec/image/upload",
+        {
+          method: "POST",
+          body: uploadData,
+        }
+      );
+      const data = await response.json();
+
+      if (data.secure_url) {
+        setFormData((prev) => ({ ...prev, image: data.secure_url }));
+        toast.success("Image uploaded successfully!", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      } else {
+        throw new Error("Image upload failed");
+      }
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      toast.error("Image upload failed. Please try again.", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+    }
+  };
+
+  const handleSubmit = async () => {
+    const { title, url, category, description } = formData;
+
+    if (!title || !url || !category || !description) {
       toast.error("All fields are required. Please fill out all fields.", {
         position: "top-right",
         autoClose: 3000,
@@ -99,18 +126,15 @@ const Page = () => {
           draggable: true,
         });
         setIsSubmitted(true);
-        // Immediately reset the form and set the submission state
-        // setFormData({
-        //   title: "",
-        //   url: "",
-        //   banner: "",
-        //   image: "",
-        //   category: "",
-        //   description: "",
-        // });
-        setIsSubmitted(false); // Reset the submission state immediately
+        setFormData({
+          title: "",
+          url: "",
+          image: "",
+          category: "",
+          description: "",
+        });
       } else {
-        toast.error("Failed to add game. Please try again later.", {
+        toast.error("Failed to add game. Please try again.", {
           position: "top-right",
           autoClose: 3000,
           hideProgressBar: false,
@@ -131,6 +155,9 @@ const Page = () => {
       });
     } finally {
       setIsSubmitting(false);
+      if (isSubmitted) {
+        setIsSubmitted(false); // Reset to allow future submissions
+      }
     }
   };
 
@@ -140,25 +167,22 @@ const Page = () => {
       <div className="my-5 flex">
         <h1 className="text-2xl font-bold">Add Game</h1>
       </div>
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col gap-5 mb-5">
         <Input
           label="Game Title"
-          labelPlacement="outside"
-          className="w-full md:w-[50%]"
-          color="secondary"
           placeholder="Enter Game Title"
           name="title"
           value={formData.title}
           onChange={handleInputChange}
-        />
-        <Select
-          className="w-full md:w-[50%]"
           labelPlacement="outside"
           color="secondary"
+        />
+        <Select
           label="Game Category"
           placeholder="Select Game Category"
+          labelPlacement="outside"
+          color="secondary"
           selectedKeys={new Set([formData.category])}
-          variant="bordered"
           onSelectionChange={handleCategoryChange}
         >
           {Categories.map((category) => (
@@ -167,47 +191,38 @@ const Page = () => {
         </Select>
         <Input
           label="Game URL"
-          labelPlacement="outside"
-          color="secondary"
-          className="w-full md:w-[50%]"
           placeholder="Enter Game URL"
           name="url"
           value={formData.url}
           onChange={handleInputChange}
-        />
-        <Input
-          label="Game Image URL"
           labelPlacement="outside"
           color="secondary"
-          className="w-full md:w-[50%]"
-          placeholder="Enter Game Image URL"
-          name="image"
-          value={formData.image}
-          onChange={handleInputChange}
+        />
+        <Input
+          type="file"
+          accept="image/*"
+          onChange={handleImageUpload}
+          label="Game Image"
+          placeholder="Select Game Image"
+          labelPlacement="outside"
+          color="secondary"
         />
       </div>
-
       <Textarea
-        color="secondary"
-        className="w-full md:w-[50%] my-5"
         label="Description"
         placeholder="Enter your description"
         name="description"
         value={formData.description}
         onChange={handleInputChange}
+        labelPlacement="outside"
+        color="secondary"
       />
-
       <button
         type="button"
-        className={`px-4 py-2 rounded-md ${
-          isSubmitting
-            ? "bg-gray-400 cursor-not-allowed"
-            : "bg-secondary text-white"
-        }`}
+        className={`px-6 py-1 rounded-md mt-5 bg-blue-500 text-white `}
         onClick={handleSubmit}
-        disabled={isSubmitting || isSubmitted}
       >
-        {isSubmitting ? "Submitting..." : isSubmitted ? "Submitted" : "Submit"}
+        Submit
       </button>
     </div>
   );
