@@ -66,7 +66,7 @@ const TopArea = () => {
         {/* Left image */}
         <Link href={`/${games[0]?._id}`} className="w-full md:w-[25%]">
           <img
-            className="w-full h-[300px] object-cover rounded-md shadow-one"
+            className="w-full h-[200px] md:h-[300px] object-cover rounded-md shadow-one"
             src={games[0]?.image}
             alt=""
           />
@@ -78,7 +78,7 @@ const TopArea = () => {
             <Link
               key={index}
               href={`/${game._id}`}
-              className="block w-full h-[140px]"
+              className="block w-full h-[100px] md:h-[140px]"
             >
               <img
                 className="w-full h-full object-cover rounded-md shadow-one"
@@ -92,7 +92,7 @@ const TopArea = () => {
         {/* Right image */}
         <Link href={`/${games[9]?._id}`} className="w-full md:w-[25%]">
           <img
-            className="w-full h-[300px] object-cover rounded-md shadow-one"
+            className="w-full h-[200px] md:h-[300px] object-cover rounded-md shadow-one"
             src={games[9]?.image}
             alt=""
           />
