@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import React from "react";
 import { Skeleton } from "@nextui-org/skeleton";
+import Link from "next/link";
 
 const TopArea = () => {
   const [games, setGames] = useState([]);
@@ -20,10 +21,8 @@ const TopArea = () => {
 
       data.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-      console.log(data);
       setGames(data);
     } catch (err) {
-      console.error("Error fetching games:", err);
       setError(err.message);
     } finally {
       setLoading(false);
@@ -38,20 +37,17 @@ const TopArea = () => {
     return (
       <div className="flex flex-col md:flex-row gap-4 justify-center items-center overflow-hidden">
         {/* Left image skeleton */}
-        <Skeleton className="w-full md:w-[25%] h-[200px] md:h-[300px] rounded-md" />
+        <Skeleton className="w-full md:w-[25%] h-[300px] rounded-md" />
 
         {/* Center grid skeleton */}
-        <div className="w-full md:w-[50%] grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-2">
+        <div className="w-full md:w-[50%] grid grid-cols-2 sm:grid-cols-3 gap-4">
           {Array.from({ length: 6 }).map((_, index) => (
-            <Skeleton
-              key={index}
-              className="h-[100px] sm:h-[146px] w-full rounded-md"
-            />
+            <Skeleton key={index} className="h-[150px] w-full rounded-md" />
           ))}
         </div>
 
         {/* Right image skeleton */}
-        <Skeleton className="w-full md:w-[25%] h-[200px] md:h-[300px] rounded-md" />
+        <Skeleton className="w-full md:w-[25%] h-[300px] rounded-md" />
       </div>
     );
   }
@@ -65,33 +61,42 @@ const TopArea = () => {
   }
 
   return (
-    <div className="">
+    <div>
       <div className="flex flex-col md:flex-row gap-4 justify-center items-center overflow-hidden">
         {/* Left image */}
-        <img
-          className="w-full md:w-[25%] h-[200px] md:h-[300px] rounded-md shadow-one"
-          src={games[0]?.image}
-          alt=""
-        />
+        <Link href={`/${games[0]?._id}`} className="w-full md:w-[25%]">
+          <img
+            className="w-full h-[300px] object-cover rounded-md shadow-one"
+            src={games[0]?.image}
+            alt=""
+          />
+        </Link>
 
         {/* Center grid */}
-        <div className="w-full md:w-[50%] grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-2">
+        <div className="w-full md:w-[50%] grid grid-cols-2 sm:grid-cols-3 gap-4">
           {games.slice(1, 7).map((game, index) => (
-            <img
+            <Link
               key={index}
-              className="h-[100px] sm:h-[146px] w-full rounded-md shadow-one"
-              src={game?.image}
-              alt=""
-            />
+              href={`/${game._id}`}
+              className="block w-full h-[140px]"
+            >
+              <img
+                className="w-full h-full object-cover rounded-md shadow-one"
+                src={game?.image}
+                alt=""
+              />
+            </Link>
           ))}
         </div>
 
         {/* Right image */}
-        <img
-          className="w-full md:w-[25%] h-[200px] md:h-[300px] rounded-md shadow-one"
-          src={games[9]?.image}
-          alt=""
-        />
+        <Link href={`/${games[9]?._id}`} className="w-full md:w-[25%]">
+          <img
+            className="w-full h-[300px] object-cover rounded-md shadow-one"
+            src={games[9]?.image}
+            alt=""
+          />
+        </Link>
       </div>
     </div>
   );

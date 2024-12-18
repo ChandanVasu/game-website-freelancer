@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import React from "react";
 import { Skeleton } from "@nextui-org/skeleton";
+import Link from "next/link";
 
 const TopArea = ({ filterData, title, sort }) => {
   const [games, setGames] = useState([]);
@@ -67,13 +68,15 @@ const TopArea = ({ filterData, title, sort }) => {
       </div>
       <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
         {games.map((game) => (
-          <div className="shadow-one rounded-md" key={game._id}>
-            <img
-              className="h-20 md:h-40 w-full rounded-md"
-              src={game.image}
-              alt=""
-            />
-          </div>
+          <Link href={`/${game._id}`} key={game._id}>
+            <div className="shadow-one rounded-md" key={game._id}>
+              <img
+                className="h-20 md:h-40 w-full rounded-md"
+                src={game.image}
+                alt=""
+              />
+            </div>
+          </Link>
         ))}
       </div>
     </div>
