@@ -2,11 +2,20 @@ import GamePage from "./game";
 import { FaEye } from "react-icons/fa";
 import GridGameOne from "@/components/main/gameGridOne";
 import Categorie from "@/components/main/categorie";
+import { cookies } from "next/headers";
 
 export default async function Page({ params }) {
+  // Retrieve the baseUrl from cookies
+  const cookieStore = cookies();
+  const baseUrl = cookieStore.get("baseUrl")?.value; // Fallback to localhost if cookie is not set
+
+  // Decode the URL in case it's URL-encoded
+  const decodedUrl = decodeURIComponent(baseUrl);
+
   const slug = (await params).game;
-  const data = await fetch(`http://localhost:3000//api/findgame?id=${slug}`);
+  const data = await fetch(`${decodedUrl}/api/findgame?id=${slug}`);
   const posts = await data.json();
+
   return (
     <div className="px-2 md:px-6 mt-2">
       <div className="flex md:flex-row flex-col gap-5">
