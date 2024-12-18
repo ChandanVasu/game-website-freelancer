@@ -13,7 +13,7 @@ export default async function Page({ params }) {
   const decodedUrl = decodeURIComponent(baseUrl);
 
   const slug = (await params).game;
-  const data = await fetch(`${decodedUrl}/api/findgame?id=${slug}`);
+  const data = await fetch(`https://game-web-job.vercel.app/api/findgame?id=${slug}`);
   const posts = await data.json();
 
   return (

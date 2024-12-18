@@ -2,7 +2,7 @@ import React from "react";
 
 export default async function Page({ grid, postlimit }) {
   const data = await fetch(
-    "http://localhost:3000//api/game?dataCollection=GameList"
+    "https://game-web-job.vercel.app/api/game?dataCollection=GameList"
   );
   const posts = await data.json();
   return (
