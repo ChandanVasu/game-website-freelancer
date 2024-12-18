@@ -6,14 +6,16 @@ import { cookies } from "next/headers";
 
 export default async function Page({ params }) {
   // Retrieve the baseUrl from cookies
-  const cookieStore = cookies();
-  const baseUrl = cookieStore.get("baseUrl")?.value; // Fallback to localhost if cookie is not set
+  const cookieStore = await cookies();
+  const baseUrl = cookieStore.get("baseUrl")?.value || "http://localhost:3000"; // Fallback to localhost if cookie is not set
 
   // Decode the URL in case it's URL-encoded
   const decodedUrl = decodeURIComponent(baseUrl);
 
-  const slug = (await params).game;
-  const data = await fetch(`https://game-web-job.vercel.app/api/findgame?id=${slug}`);
+  // Await the params object before accessing its properties
+  const { game: slug } = await params;
+
+  const data = await fetch(`${decodedUrl}/api/findgame?id=${slug}`);
   const posts = await data.json();
 
   return (
