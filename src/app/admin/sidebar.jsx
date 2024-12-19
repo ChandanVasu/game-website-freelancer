@@ -96,10 +96,10 @@ const SideBar = () => {
           </li>
         </Link>
 
-        <Link href="/pages">
+        <Link href="/admin/page">
           <li
             className={`flex gap-2 items-center justify-start px-3 py-1 rounded-md text-base ${
-              pathname === "/pages" ? "bg-white" : "hover:bg-white/60"
+              pathname === "/admin/page" ? "bg-white" : "hover:bg-white/60"
             }`}
           >
             <FaBook />

@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { Skeleton } from "@nextui-org/skeleton";
+import Link from "next/link";
 
 const Categorie = () => {
   const [categories, setCategories] = useState([]);
@@ -40,17 +41,19 @@ const Categorie = () => {
               </div>
             ))
           : categories.map((categorie) => (
-              <div
-                className="flex justify-start gap-2 items-center"
-                key={categorie._id}
-              >
-                <img
-                  className="h-14 w-14 rounded-full shadow-one"
-                  src={categorie.image}
-                  alt=""
-                />
-                <p className="text-sm md:text-base">{categorie.name}</p>
-              </div>
+              <Link  key={categorie._id} href={`/categorie?cat=${categorie.name}`}>
+                <div
+                  className="flex justify-start gap-2 items-center"
+                 
+                >
+                  <img
+                    className="h-14 w-14 rounded-full shadow-one"
+                    src={categorie.image}
+                    alt=""
+                  />
+                  <p className="text-sm md:text-base">{categorie.name}</p>
+                </div>
+              </Link>
             ))}
       </div>
     </div>
