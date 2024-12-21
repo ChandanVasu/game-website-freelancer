@@ -4,7 +4,7 @@ const side = () => {
   return (
     <div >
       <img
-        src="https://bannerboo.com/upload/medialibrary/282/liveplan_ad_example.png"
+        src="/ad3.png"
         alt=""
       />
     </div>

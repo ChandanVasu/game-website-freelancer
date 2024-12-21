@@ -4,7 +4,7 @@ const banner2 = () => {
   return (
     <div  className='flex justify-center'>
       <img
-        src="https://bannerboo.com/upload/medialibrary/bd7/samsumg_ad_example.png"
+        src="/ad2.png"
         alt=""
       />
     </div>
