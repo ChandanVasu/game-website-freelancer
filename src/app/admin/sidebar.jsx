@@ -4,16 +4,16 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation"; // Hook to get the current pathname
 import { CiHome } from "react-icons/ci";
-import { IoMdPricetag } from "react-icons/io";
+// import { IoMdPricetag } from "react-icons/io";
 // import { TbUserFilled } from "react-icons/tb";
 // import { FaImages } from "react-icons/fa";
 
 // import { SiMinutemailer } from "react-icons/si";
 // import { IoIosColorPalette } from "react-icons/io";
-import { MdSettings } from "react-icons/md";
+// import { MdSettings } from "react-icons/md";
 import { IoLogoGameControllerB } from "react-icons/io";
 
-import { BsTrash3 } from "react-icons/bs";
+// import { BsTrash3 } from "react-icons/bs";
 import { FaBlog, FaAd } from "react-icons/fa";
 import { BiSolidCategoryAlt } from "react-icons/bi";
 import { MdComment } from "react-icons/md";
@@ -162,18 +162,18 @@ const SideBar = () => {
           </li>
         </Link> */}
 
-        <Link href="/advertisement">
+        {/* <Link href="/admin/ad">
           <li
             className={`flex gap-2 items-center justify-start px-3 py-1 rounded-md text-base ${
-              pathname === "/advertisement" ? "bg-white" : "hover:bg-white/60"
+              pathname === "/admin/ad" ? "bg-white" : "hover:bg-white/60"
             }`}
           >
             <FaAd />
             <p className="font-medium text-sm">Advertisement</p>
           </li>
-        </Link>
+        </Link> */}
 
-        <Link href="/settings">
+        {/* <Link href="/settings">
           <li
             className={`flex gap-2 items-center justify-start px-3 py-1 rounded-md text-base ${
               pathname === "/settings" ? "bg-white" : "hover:bg-white/60"
@@ -182,7 +182,7 @@ const SideBar = () => {
             <MdSettings />
             <p className="font-medium text-sm">Settings</p>
           </li>
-        </Link>
+        </Link> */}
 
         {/* <Link href="/delete-all-games">
           <li

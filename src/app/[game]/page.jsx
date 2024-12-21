@@ -3,6 +3,9 @@ import { FaEye } from "react-icons/fa";
 import GridGameOne from "@/components/main/gameGridOne";
 import Categorie from "@/components/main/categorie";
 import { cookies } from "next/headers";
+import Side from "@/components/main/ad/side";
+import Banner from "@/components/main/ad/banner";
+import Banner2 from "@/components/main/ad/banner2";
 
 export default async function Page({ params }) {
   // Retrieve the baseUrl from cookies
@@ -20,7 +23,10 @@ export default async function Page({ params }) {
 
   return (
     <div className="px-2 md:px-6 mt-2">
-      <div className="flex md:flex-row flex-col gap-5">
+      <div
+        className="flex md:flex-row flex-col gap-5 
+      "
+      >
         <div className="w-[300px] hidden md:block">
           <GamePage grid={1} postlimit={5} />
         </div>
@@ -39,13 +45,21 @@ export default async function Page({ params }) {
             </div>
           </div>
         </div>
-        <div className="w-[600px] hidden md:block">
-          <GamePage grid={2} postlimit={10} />
+        <div className="w-[450px]  hidden md:block">
+          {/* <GamePage grid={2} postlimit={10} /> */}
+          <Side></Side>
         </div>
       </div>
       <div className="mt-5">
         <GridGameOne title={"Related Games"}></GridGameOne>
       </div>
+        <div className="space-y-4 ">
+        <Banner></Banner>
+      <GridGameOne sort={true} title={"Car Games"} filterData={"Car Games"}></GridGameOne>
+      <Banner2></Banner2>
+      <GridGameOne sort={true} title={"Fighting"} filterData={"Fighting"}></GridGameOne>
+      <Banner></Banner>
+        </div>
       <div className="mt-5">
         <Categorie></Categorie>
       </div>

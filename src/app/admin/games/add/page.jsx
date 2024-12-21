@@ -126,13 +126,13 @@ const Page = () => {
           draggable: true,
         });
         setIsSubmitted(true);
-        setFormData({
-          title: "",
-          url: "",
-          image: "",
-          category: "",
-          description: "",
-        });
+        // setFormData({
+        //   title: "",
+        //   url: "",
+        //   image: "",
+        //   category: "",
+        //   description: "",
+        // });
       } else {
         toast.error("Failed to add game. Please try again.", {
           position: "top-right",
