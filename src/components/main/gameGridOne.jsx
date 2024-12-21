@@ -4,7 +4,7 @@ import React from "react";
 import { Skeleton } from "@nextui-org/skeleton";
 import Link from "next/link";
 
-const TopArea = ({ filterData, title, sort }) => {
+const TopArea = ({ filterData, title, sort, limit }) => {
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -27,7 +27,15 @@ const TopArea = ({ filterData, title, sort }) => {
         data.sort((a, b) => new Date(b.date) - new Date(a.date));
       }
 
-      setGames(data.slice(0, 12));
+      if (limit) {
+        setGames(data);
+      } else {
+        setGames(data.slice(0, 12));
+      }
+
+      // setGames(data);
+
+      // setGames(data.slice(0, 12));
     } catch (err) {
       console.error("Error fetching games:", err);
       setError(err.message);
@@ -64,7 +72,9 @@ const TopArea = ({ filterData, title, sort }) => {
     <div className="">
       <div className="mb-2 flex justify-between items-center">
         <h1 className="text-lg font-bold">{title || "New Game"}</h1>
-        <p className="text-xs md:text-sm text-blue-700">All Game</p>
+        <Link href={`/categorie?cat=${filterData}`}>
+          <p className="text-xs md:text-sm text-blue-700">All Game</p>
+        </Link>
       </div>
       <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
         {games.map((game) => (
