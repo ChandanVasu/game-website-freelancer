@@ -100,7 +100,7 @@ const Page = () => {
       </div>
       <div className="mb-6">
         <Editor
-          tinymceScriptSrc="https://cdn.jsdelivr.net/npm/tinymce@7.6.0/tinymce.min.js"
+          tinymceScriptSrc="https://cdn.jsdelivr.net/npm/tinymce@7.4.0/tinymce.min.js"
           className="h-full"
           init={{
             license_key: "gpl",
