@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
+import  { Suspense } from "react";
+
 
 const PageContent = () => {
   const searchParams = useSearchParams();
