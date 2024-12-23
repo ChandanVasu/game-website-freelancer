@@ -8,7 +8,7 @@ import SideGame from "./sideGame";
 import Side from "@/components/main/ad/side";
 import { FaEye } from "react-icons/fa";
 
-export default function Game() {
+export default function Game({ id }) {
   const [game, setGame] = useState([]);
   const [play, setPlay] = useState(false);
 
@@ -16,12 +16,9 @@ export default function Game() {
     console.log("fetching game");
 
     try {
-      const response = await fetch(
-        "http://localhost:3000/api/findgame?id=675e8e44b1407e316205fd30",
-        {
-          cache: "force-cache",
-        }
-      );
+      const response = await fetch(`/api/findgame?id=${id}`, {
+        cache: "force-cache",
+      });
       const data = await response.json();
       console.log(data);
       setGame(data);

@@ -5,7 +5,7 @@ export default async function Page({ params }) {
   return (
     <div>
       {/* My Post: {slug}  */}
-      <Game />{" "}
+      <Game id={slug} />
     </div>
   );
 }
