@@ -7,6 +7,10 @@ import { Button } from "@nextui-org/react";
 import SideGame from "./sideGame";
 import Side from "@/components/main/ad/side";
 import { FaEye } from "react-icons/fa";
+import Banner from "@/components/main/ad/banner";
+import Banner2 from "@/components/main/ad/banner2";
+import GridGameOne from "@/components/main/gameGridOne";
+import Categorie from "@/components/main/categorie";
 
 export default function Game({ id }) {
   const [game, setGame] = useState([]);
@@ -37,13 +41,15 @@ export default function Game({ id }) {
         <div className="w-[300px] hidden md:block">
           <SideGame />
         </div>
-        <div className=" w-full h-[550px] rounded-md shadow-one">
+        <div className=" w-full h-[550px] md:h-[550px] rounded-md shadow-one">
           <div>
             {!play && (
-              <div className="flex flex-col items-center min-h-[550px]  justify-center">
-                <Image className="w-[200px] h-[150px]" src={game.image}></Image>
-                <h1>{game.title}</h1>
+              <div className="flex flex-col items-center min-h-[550px] gap-5  justify-center">
+                <h1 className="text-3xl font-bold">{game.title}</h1>
+                <Image className="w-[300px] h-[150px]" src={game.image}></Image>
                 <Button
+                  size="lg"
+                  className="bg-blue-800 text-white "
                   onPress={() => {
                     setPlay(true);
                   }}
@@ -75,7 +81,31 @@ export default function Game({ id }) {
           <Side />
         </div>
       </div>
-      <div></div>
+      <div>
+        <div className="mt-5">
+          <GridGameOne title={"Related Games"}></GridGameOne>
+        </div>
+        <div className="space-y-4 ">
+          <div className="mt-5">
+            <Banner></Banner>
+          </div>
+          <GridGameOne
+            sort={true}
+            title={"Car Games"}
+            filterData={"Car Games"}
+          ></GridGameOne>
+          <Banner2></Banner2>
+          <GridGameOne
+            sort={true}
+            title={"Fighting"}
+            filterData={"Fighting"}
+          ></GridGameOne>
+          <Banner></Banner>
+        </div>
+        <div className="mt-5">
+          <Categorie></Categorie>
+        </div>
+      </div>
     </div>
   );
 }
