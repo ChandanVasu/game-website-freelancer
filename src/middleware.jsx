@@ -1,18 +1,51 @@
 import { NextResponse } from "next/server";
 
-// Middleware to set a cookie
 export function middleware(request) {
-  // Create a new response by cloning the original request
   const response = NextResponse.next();
 
-  const baseUrl = request.nextUrl.origin;
+  const url = request.nextUrl.clone();
 
-  response.cookies.set("baseUrl", baseUrl);
+  const loginCookie = request.cookies.get("login")?.value;
+
+  // console.log("Login Cookie:", loginCookie);
+
+  // if (loginCookie?.value === "true") {
+  //   console.log("Login Success");
+  //   if (url.pathname === "/login") {
+  //     url.pathname = "/";
+  //     return NextResponse.redirect(url);
+  //   }
+  // } else {
+  //   console.log("Login Failed");
+  //   url.pathname = "/login";
+  //   return NextResponse.redirect(url);
+  // }
+
+  if (loginCookie) {
+    try {
+      console.log("Login Success");
+      if (url.pathname === "/login") {
+        url.pathname = "/admin";
+        return NextResponse.redirect(url);
+      }
+
+      return NextResponse.next();
+    } catch {
+      console.log("Login Failed");
+    }
+  } else {
+    console.log("Login Failed");
+    if (url.pathname !== "/login") {
+      url.pathname = "/login";
+      return NextResponse.redirect(url);
+    }
+
+    // Allow access to the login page if no auth token is present
+    return NextResponse.next();
+  }
 
   return response;
 }
-
-// Middleware configuration
 export const config = {
-  matcher: "/:path*", // Apply the middleware to all paths
+  matcher: ["/admin/:path*", "/login"],
 };
