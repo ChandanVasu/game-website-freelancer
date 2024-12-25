@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Input, Button } from "@nextui-org/react";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import { loginData } from "@/lib/config"; // Adjust the path as needed
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -10,21 +11,15 @@ const LoginPage = () => {
   const [error, setError] = useState(""); // State for error message
   const router = useRouter();
 
-  const emailId = process.env.NEXT_PUBLIC_LOGIN_EMAIL;
-  const passwordId = process.env.NEXT_PUBLIC_LOGIN_PASSWORD;
-
   const Login = () => {
-    if (email === emailId && password === passwordId) {
+    if (email === loginData.email && password === loginData.password) {
       console.log("Login Success");
       Cookies.set("login", "true"); // Set login as true in cookies
       setError(""); // Clear error message
       router.push("/admin"); // Redirect to dashboard
-      console.log(emailId, passwordId, email, password);
     } else {
       console.log("Login Failed");
       setError("Invalid email or password. Please try again.");
-      console.log(emailId, passwordId, email, password);
-
     }
   };
 
