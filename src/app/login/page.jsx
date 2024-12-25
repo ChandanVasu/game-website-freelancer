@@ -19,6 +19,7 @@ const LoginPage = () => {
       Cookies.set("login", "true"); // Set login as true in cookies
       setError(""); // Clear error message
       router.push("/admin"); // Redirect to dashboard
+      console.log(emailId, passwordId, email, password);
     } else {
       console.log("Login Failed");
       setError("Invalid email or password. Please try again.");
