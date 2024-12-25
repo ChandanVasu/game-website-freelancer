@@ -22,8 +22,19 @@ import { MdBugReport } from "react-icons/md";
 import { FiLogOut } from "react-icons/fi";
 import { FaBook } from "react-icons/fa";
 
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
+
 const SideBar = () => {
   const pathname = usePathname(); // Get the current path
+
+  const router = useRouter();
+
+  const logout = () => {
+    console.log("Logout");
+    Cookies.remove("login");
+    router.push("/");
+  };
 
   return (
     <div>
@@ -197,16 +208,15 @@ const SideBar = () => {
           </li>
         </Link> */}
 
-        <Link href="/logout">
-          <li
-            className={`flex gap-2 items-center justify-start px-3 py-1 rounded-md text-base ${
-              pathname === "/logout" ? "bg-white" : "hover:bg-white/60"
-            }`}
-          >
-            <FiLogOut />
-            <p className="font-medium text-sm">Logout</p>
-          </li>
-        </Link>
+        <li
+        onClick={logout}
+          className={`flex gap-2 items-center justify-start px-3 py-1 rounded-md text-base cursor-pointer ${
+            pathname === "/logout" ? "bg-white" : "hover:bg-white/60"
+          }`}
+        >
+          <FiLogOut />
+          <p className="font-medium text-sm">Logout</p>
+        </li>
       </ul>
     </div>
   );
