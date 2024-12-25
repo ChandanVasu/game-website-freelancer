@@ -23,6 +23,8 @@ const LoginPage = () => {
     } else {
       console.log("Login Failed");
       setError("Invalid email or password. Please try again.");
+      console.log(emailId, passwordId, email, password);
+
     }
   };
 
