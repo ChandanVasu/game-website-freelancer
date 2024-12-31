@@ -26,7 +26,7 @@ export default function Game({ id }) {
   const [game, setGame] = useState([]);
   const [play, setPlay] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  // const [bug, setBug] = useState("");
+  const [bug, setBug] = useState("");
 
   const fetchGame = async () => {
     console.log("Fetching game...");
@@ -42,7 +42,10 @@ export default function Game({ id }) {
     }
   };
 
-
+  const reportPost = async () => {
+    console.log(bug);
+    onClose();
+  };
 
   useEffect(() => {
     fetchGame();
@@ -140,13 +143,15 @@ export default function Game({ id }) {
                 className="max-w-full"
                 label="Description"
                 placeholder="Enter your description"
+                value={bug}
+                onChange={(e) => setBug(e.target.value)}
               />
             </ModalBody>
             <ModalFooter>
               <Button color="danger" variant="light" onPress={onClose}>
                 Close
               </Button>
-              <Button color="primary" onPress={onClose}>
+              <Button color="primary" onPress={reportPost}>
                 Submit
               </Button>
             </ModalFooter>
